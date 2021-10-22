@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./dist/css/styles.css" />
+    <title>Books</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <h1 class="nav-header">Books</h1>
+    </nav>
+
+    <!-- <button class="new-book-btn">Add New Book</button>-->
+
+    <div class="popup">
+      <div class="popup-item close">
+        <span class="close-btn">X</span>
+      </div>
+
+      <form class="popup-item new-book">
+        <small class="msg"></small>
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" />
+        <label for="genre">Genre</label>
+        <input type="text" id="genre" name="genre" />
+        <label for="author">Author</label>
+        <input type="text" id="author" name="author" />
+        <div class="checkbox">
+          <input type="checkbox" id="read" name="read" value="Read" />
+          <label for="read">Read</label>
+        </div>
+        <button type="submit" id="submit-new-book">Add</button>
+      </form>
+    </div>
+    <section class="wrapper">
+      <div class="booklist booklist-unread"></div>
+    </section>
+    <div class="fab">+</div>
+    <script src="./dist/js/books.js"></script>
+    <script src="./dist/js/index.js"></script>
+  </body>
+</html>
