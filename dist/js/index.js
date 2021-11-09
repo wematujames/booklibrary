@@ -1,54 +1,77 @@
 const form = document.querySelector(".new-book"),
   checkBoxforRead = document.querySelector("#read"),
-  bookList = document.querySelector(".booklist"),
+  display = document.querySelector(".wrapper"),
   newBookFab = document.querySelector(".fab"),
   popup = document.querySelector(".popup"),
   closePopupBtn = document.querySelector(".close-btn");
 
+//Init local storage from books
+if (!localStorage.getItem("data")) {
+  localStorage.setItem("data", JSON.stringify({ categories: [], books: [] }));
+}
+
 //Global Vars
-let unReadBooks;
 let isRead = false;
-//Render books already in local storage;
-renderItems(bookList);
-//Checkbos stuff
+
+//Render books stored
+const books = new Books(display);
+books.renderBooks();
+
+//Checkbox control
 checkBoxforRead.addEventListener("click", () => {
   isRead = !isRead;
 });
-//new book show on fab
+
+//New book FAB
 newBookFab.addEventListener("click", () => {
   popup.classList += " show";
 });
 closePopupBtn.addEventListener("click", () => {
   popup.classList.remove("show");
 });
-//on form sumbit
-// localStorage.removeItem("books");
+
+//Add new book
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  const { target } = e;
-  const title = target.querySelector("#title").value,
-    genre = target.querySelector("#genre").value,
-    author = target.querySelector("#author").value,
-    read = isRead,
-    msg = target.querySelector(".msg");
 
-  if (!title || !author || !genre) {
-    msg.innerText = `Please complete all field`;
-    msg.classList.add("error");
-    setTimeout(() => {
-      msg.innerText = ``;
-      msg.classList.remove("error");
-    }, 3000);
-    return;
+  //Get book details from form
+  const title = form.querySelector("#title"),
+    genre = form.querySelector("#genre"),
+    author = form.querySelector("#author"),
+    category = form.querySelector("#category"),
+    err = form.querySelector(".err");
+
+  //Validate book
+  if (!title.value || !author.value || !genre.value || !category.value) {
+    return showError(err);
   }
-  const newBook = new Book(title, genre, author, read);
-  const books = JSON.parse(localStorage.getItem("books"));
-  if (!newBook.isRead) {
-    books.unReadBooks.push(newBook);
-  } else {
-    books.readBooks.push(newBook);
-  }
-  localStorage.setItem("books", JSON.stringify(books));
-  renderItems(bookList);
-  clearForm([title, genre, author]);
+
+  books.addBook({
+    title: title.value,
+    genre: genre.value,
+    author: author.value,
+    category: category.value,
+    isRead,
+  }); //Add new book
+
+  books.renderBooks(); //Update books showing
+  clearForm([title, genre, author]); //Clear form
 });
+
+//Clear form
+function clearForm(fields) {
+  fields.forEach((field) => {
+    field.value = "";
+  });
+}
+
+//Show error
+function showError(el) {
+  el.innerText = `Please complete all fields`;
+  el.classList.add("error");
+  setTimeout(() => {
+    el.innerText = ``;
+    el.classList.remove("error");
+  }, 3000);
+  return;
+}

@@ -108,21 +108,8 @@ button:hover {
   width: 100%;
   padding: 1rem;
 }
-.booklist {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 1rem;
-  width: 100%;
-  max-width: 1000px;
-  /* padding: 1rem; */
-}
-.book {
-  background: rgba(255, 255, 255, 0.8);
-  /* margin: 1rem; */
-  padding: 1rem;
-  width: 100%;
-  border-radius: var(--borderRadius);
-}
+
+/* Fab */
 .fab {
   position: fixed;
   font-size: 3rem;
@@ -138,14 +125,4 @@ button:hover {
 .fab:hover {
   cursor: pointer;
   background: #63d8e0;
-}
-@media (max-width: 1025px) {
-  .booklist {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 600px) {
-  .booklist {
-    grid-template-columns: repeat(1, 1fr);
-  }
 }
