@@ -1,1 +1,1 @@
-A custom HTML5 video player with basic video player fuctionlities such as play, stop, pause and also the ability to jump to certain part of video.
+A rather simple front-end project which aims at keeping a record of all the books a user has read and not read. Ultimately, this will give the user the opportunity to add a personalised category for books so as to be able to filter and sort books by certain catergories and also by read status, thus, where or not the book has been read.
